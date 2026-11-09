@@ -1,0 +1,112 @@
+
+[TestTemplate_BuildCmd_NOutputDir - 1]
+FROM node:18 AS build
+
+ENV PORT=8080
+WORKDIR /src
+
+RUN npm install -g yarn@latest
+COPY . .
+RUN yarn install
+
+# Build if we can build it
+RUN yarn build
+
+EXPOSE 8080
+CMD yarn start
+
+---
+
+[TestTemplate_BuildCmd_OutputDir - 1]
+FROM node:18 AS build
+
+ENV PORT=8080
+WORKDIR /src
+
+RUN npm install -g yarn@latest
+COPY . .
+RUN yarn install
+
+# Build if we can build it
+RUN yarn build
+
+FROM scratch AS output
+COPY --from=build /src///app/dist /
+FROM zeabur/caddy-static AS runtime
+COPY --from=output / /usr/share/caddy
+
+
+---
+
+[TestTemplate_Monorepo - 1]
+FROM node:18 AS build
+
+ENV PORT=8080
+WORKDIR /src
+
+RUN npm install -g yarn@latest
+COPY . .
+WORKDIR /src/myservice
+RUN yarn install
+
+# Build if we can build it
+
+
+EXPOSE 8080
+CMD yarn start
+
+---
+
+[TestTemplate_NBuildCmd_NOutputDir - 1]
+FROM node:18 AS build
+
+ENV PORT=8080
+WORKDIR /src
+
+RUN npm install -g yarn@latest
+COPY . .
+RUN yarn install
+
+# Build if we can build it
+
+
+EXPOSE 8080
+CMD yarn start
+
+---
+
+[TestTemplate_NBuildCmd_OutputDir_NSPA - 1]
+FROM node:18 AS build
+
+ENV PORT=8080
+WORKDIR /src
+
+RUN npm install -g yarn@latest
+COPY . .
+RUN yarn install
+
+# Build if we can build it
+
+
+EXPOSE 8080
+CMD yarn start
+
+---
+
+[TestTemplate_NBuildCmd_OutputDir_SPA - 1]
+FROM node:18 AS build
+
+ENV PORT=8080
+WORKDIR /src
+
+RUN npm install -g yarn@latest
+COPY . .
+RUN yarn install
+
+# Build if we can build it
+
+
+EXPOSE 8080
+CMD yarn start
+
+---

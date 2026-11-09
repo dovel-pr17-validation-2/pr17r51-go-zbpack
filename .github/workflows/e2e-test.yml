@@ -1,0 +1,35 @@
+name: Real Project Test
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    e2e-test:
+        name: e2e-test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+              with:
+                submodules: 'true'
+                persist-credentials: false
+            - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+              with:
+                  go-version-file: 'go.mod'
+            - name: Run tests
+              run: go test -v ./tests
+              env:
+                  GITHUB_PAT: ${{ github.token }}
+            - name: Check if the snapshot is different
+              run: |
+                  git diff --exit-code
+                  if [ $? -eq 1 ]; then
+                      echo "The snapshot is different"
+                      exit 1
+                  fi

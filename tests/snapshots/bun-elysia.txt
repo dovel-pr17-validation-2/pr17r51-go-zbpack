@@ -1,0 +1,13 @@
+PlanType: bun
+
+Meta:
+  appDir: ""
+  buildCmd: ""
+  bun: "true"
+  bunVersion: "latest"
+  framework: "none"
+  initCmd: "RUN npm install -f -g pnpm@10 || npm install -f -g pnpm@8"
+  installCmd: "RUN pnpm install"
+  nodeVersion: "22"
+  packageManager: "pnpm"
+  startCmd: "pnpm src/index.ts"

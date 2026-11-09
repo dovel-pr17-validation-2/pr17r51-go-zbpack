@@ -1,0 +1,12 @@
+PlanType: nodejs
+
+Meta:
+  appDir: ""
+  buildCmd: "npm run build"
+  bun: "false"
+  framework: "svelte"
+  initCmd: "RUN npm update -g npm"
+  installCmd: "RUN npm install"
+  nodeVersion: "22"
+  packageManager: "npm"
+  startCmd: "node build/index.js"

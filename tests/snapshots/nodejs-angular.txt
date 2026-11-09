@@ -1,0 +1,13 @@
+PlanType: nodejs
+
+Meta:
+  appDir: ""
+  buildCmd: "npm run build"
+  bun: "false"
+  framework: "angular"
+  initCmd: "RUN npm update -g npm"
+  installCmd: "RUN npm install"
+  nodeVersion: "22"
+  outputDir: "dist/angular-template/browser"
+  packageManager: "npm"
+  startCmd: ""

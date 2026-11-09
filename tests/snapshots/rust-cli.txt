@@ -1,0 +1,10 @@
+PlanType: rust
+
+Meta:
+  appDir: "."
+  assets: ""
+  buildCommand: ""
+  entry: "rust-cli"
+  openssl: "false"
+  preStartCommand: ""
+  startCommand: ""
